@@ -47,23 +47,23 @@ var education = {
         "name": "The Jade Palace ",
         "location": "Jade Buddha Temple",
         "degree": "Dragon Warrior",
-        "majors": ["Kung Fu Master"],
+        "majors": ["Kung Fu Master", "Dragon Warrior"],
         "dates": "2008 - 2009",
-        "url": "Jade.Palace.com"
+        "url": "http://www.Jade.Palace.com"
     }, {
         "name": "Noodle shop of Mr. Ping",
         "location": "peace vallay",
         "degree": "bachelor",
         "majors": ["Noodle Making"],
         "dates": "2005 - 2006",
-        "url": "noodle.shop.com"
+        "url": "http://www.noodle.shop.com"
     }],
 
     "onlineCourses": [{
         "title": "Kung Fu master nanodegree",
         "school": "Udacity",
         "dates": "2006-2008",
-        "url": "Udacity.com"
+        "url": "http://www.Udacity.com"
     }]
 
 };
@@ -88,28 +88,29 @@ bio.display = function() {
     var Email = HTMLemail.replace("%data%", bio.contacts.email);
     var Github = HTMLcontactGeneric.replace("%contact%", "github").replace("%data%", bio.contacts.github);
     $("#footerContacts").append(Mobile, Email, Github);
-    $("#topContacts").append(Mobile,Email,Github);
+    $("#topContacts").append(Mobile, Email, Github);
 
 };
 
 education.display = function() {
     education.schools.forEach(function(school) {
         $("#education").append(HTMLschoolStart);
-
         var Name = HTMLschoolName.replace("%data%", school.name);
+        Name = Name.replace("#", school.url); // Insert URL for
         var Degree = HTMLschoolDegree.replace("%data%", school.degree);
         var Dates = HTMLschoolDates.replace("%data%", school.dates);
         var Location = HTMLschoolLocation.replace("%data%", school.location);
-        var Major = HTMLschoolMajor.replace("%data%", school.majors);        
-        $(".education-entry:last").append(Name + Degree, Dates, Location, Major, URL);
+        var Major = HTMLschoolMajor.replace("%data%", school.majors);
+        $(".education-entry:last").append(Name + Degree, Dates, Location, Major);
     });
-     education.onlineCourses.forEach(function(course) {
+    education.onlineCourses.forEach(function(course) {
         $(".education-entry:last").append(HTMLonlineClasses);
         var OnlineTitle = HTMLonlineTitle.replace("%data%", course.title);
         var OnlineSchool = HTMLonlineSchool.replace("%data%", course.school);
         var OnlineDates = HTMLonlineDates.replace("%data%", course.dates);
-        var OnlineURL = HTMLonlineURL.replace("%data%", course.url);        
-        $(".education-entry:last").append( OnlineTitle + OnlineSchool, OnlineDates, OnlineURL);
+        var OnlineURL = HTMLonlineURL.replace("%data%", course.url);
+        OnlineURL = OnlineURL.replace("#", course.url);
+        $(".education-entry:last").append(OnlineTitle + OnlineSchool, OnlineDates, OnlineURL);
     });
 };
 
@@ -122,7 +123,7 @@ work.display = function() {
         var Dates = HTMLworkDates.replace("%data%", job.dates);
         var Description = HTMLworkDescription.replace("%data%", job.description);
         var Location = HTMLworkLocation.replace("%data%", job.location);
-        $(".work-entry:last").append(Employer + Title, Dates, Description,Location);
+        $(".work-entry:last").append(Employer + Title, Dates, Description, Location);
     });
 };
 
